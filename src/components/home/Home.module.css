@@ -17,3 +17,9 @@
     width: 300px;
     transition: 0.5s;
 }
+
+.ring {
+    display: flex;
+    margin-top: 200px;
+    justify-content: center;
+  }

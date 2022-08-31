@@ -6,6 +6,9 @@ import {
   GET_ALL_PLANETS,
   GET_PLANETS_DETAIL,
   SET_PLANETS_DETAIL,
+  GET_ALL_VEHICLES,
+  GET_VEHICLES_DETAIL,
+  SET_VEHICLES_DETAIL,
 } from "./actionTypes";
 
 export const getAllCharacters = (page) => {
@@ -76,6 +79,42 @@ export function setDetailPlanets() {
   return async function (dispatch) {
     return dispatch({
       type: SET_PLANETS_DETAIL,
+    });
+  };
+}
+
+export const getAllVehicles = (page) => {
+  return async function (dispatch) {
+    try {
+      const res = await axios(`http://localhost:3001/vehicles?page=${page}`);
+      return dispatch({
+        type: GET_ALL_VEHICLES,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getAllVehiclesDetails = (id) => {
+  return async function (dispatch) {
+    try {
+      const res = await axios.get(`http://localhost:3001/vehicles/${id}`);
+      return dispatch({
+        type: GET_VEHICLES_DETAIL,
+        payload: res.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export function setDetailVehicles() {
+  return async function (dispatch) {
+    return dispatch({
+      type: SET_VEHICLES_DETAIL,
     });
   };
 }

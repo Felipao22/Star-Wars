@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCharacters } from "../../redux/actions";
-import { Cards } from "../cards/Cards";
 import { RingLoader } from "react-spinners";
+import { getAllVehicles } from "../../redux/actions";
 import NavBar from "../navbar/NavBar";
-import styles from "./Home.module.css";
+import VehiclesCards from "../vehiclesCards/VehiclesCards";
+import styles from './Vehicles.module.css'
 
-export default function Home() {
-  const allCharacters = useSelector((state) => state.characters);
+export default function Vehicles() {
+  const allVehicles = useSelector((state) => state.vehicles);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(getAllCharacters(page));
+    dispatch(getAllVehicles(page));
   }, [dispatch, page]);
 
   return (
@@ -24,16 +24,11 @@ export default function Home() {
         <button onClick={() => setPage(2)}>2</button>
         <button onClick={() => setPage(3)}>3</button>
         <button onClick={() => setPage(4)}>4</button>
-        <button onClick={() => setPage(5)}>5</button>
-        <button onClick={() => setPage(6)}>6</button>
-        <button onClick={() => setPage(7)}>7</button>
-        <button onClick={() => setPage(8)}>8</button>
-        <button onClick={() => setPage(9)}>9</button>
         <button onClick={() => setPage(page + 1)}>Next</button>
       </div>
       <div>
-        {allCharacters.length > 0 ? (
-          <Cards currentCharacters={allCharacters} />
+        {allVehicles.length > 0 ? (
+          <VehiclesCards currentVehicles={allVehicles} />
         ) : (
           <div className={styles.ring}>
             <RingLoader color="blue" size={200} />

@@ -11,7 +11,6 @@ export default function Detail() {
   const { id } = useParams();
   const characters = useSelector((state) => state.characterDetails);
   const gState = useSelector((state) => state);
-  console.log(gState);
 
   //images from visualguide
   let imgUrlSplit = characters?.url?.split("/");

@@ -2,32 +2,31 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RingLoader } from "react-spinners";
-import { getAllPlanetsDetails, setDetailPlanets } from "../../redux/actions";
-import styles from "./DetailPlanets.module.css";
+import { getAllVehiclesDetails, setDetailVehicles } from "../../redux/actions";
+import styles from './DetailVehicles.module.css'
 
-export default function DetailPlanets() {
+export default function DetailVehicles() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
-  const planets = useSelector((state) => state.planetsDetails);
+  const vehicles = useSelector((state) => state.vehiclesDetails);
   const gState = useSelector((state) => state);
-  console.log(planets)
 
   //images from visualguide
-  let imgUrlSplit = planets?.url?.split("/");
+  let imgUrlSplit = vehicles?.url?.split("/");
   var idFromUrl = imgUrlSplit && imgUrlSplit[imgUrlSplit.length - 2];
-  var baseImgUrl = "https://starwars-visualguide.com/assets/img/planets/";
+  var baseImgUrl = "https://starwars-visualguide.com/assets/img/vehicles/";
   const img = `${baseImgUrl}${idFromUrl}.jpg`;
 
   //starships
-  const char = gState?.planets.find((e) => e.id === parseInt(id));
-  const residents = char.residents ? char.residents : "n/a";
+  const char = gState?.vehicles.find((e) => e.id === parseInt(id));
+  const pilots = char.pilots ? char.pilots : "n/a";
   const films = char.films;
 
   useEffect(() => {
-    dispatch(getAllPlanetsDetails(id));
+    dispatch(getAllVehiclesDetails(id));
     return () => {
-      dispatch(setDetailPlanets());
+      dispatch(setDetailVehicles());
     };
   }, [dispatch, id]);
 
@@ -45,18 +44,20 @@ export default function DetailPlanets() {
         )}
       </div>
       <div>
-        {planets.name ? (
+        {vehicles.name ? (
           <div>
-            <h1>Name: {planets.name}</h1>
-            <p>Rotation Period: {planets.rotation_period} days</p>
-            <p>Orbital Period: {planets.orbital_period} days</p>
-            <p>Diameter: {planets.diameter}km</p>
-            <p>Gravity: {planets.gravity}</p>
-            <p>Surface Water: {planets.surface_water}%</p>
-            <p>Population: {planets.population}</p>
-            <p>Climate: {planets.climate}</p>
-            <p>Terrain: {planets.terrain}</p>
-            <p>Residents: {residents.join(', ') ? residents.join(', ') : 'n/a'}</p>
+            <h1>Name: {vehicles.name}</h1>
+            <p>Model: {vehicles.model}</p>
+            <p>Manufacturer: {vehicles.manufacturer}</p>
+            <p>Cost in credits: {vehicles.cost_in_credits}</p>
+            <p>Length: {vehicles.length}</p>
+            <p>Max atmosphering speed: {vehicles.max_atmosphering_speed}</p>
+            <p>Crew: {vehicles.crew}</p>
+            <p>Passengers: {vehicles.passengers}</p>
+            <p>Consumables: {vehicles.consumables}</p>
+            <p>Vehicle class: {vehicles.vehicle_class}</p>
+            <p>Cargo capacity: {vehicles.cargo_capacity}</p>
+            <p>Pilots: {pilots.join(', ')? pilots.join(', ') : 'n/a'}</p>
             <p>Films: {films.join(", ")}</p>
           </div>
         ) : (

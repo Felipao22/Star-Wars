@@ -2,9 +2,12 @@ import {
   GET_ALL_CHARACTERS,
   GET_ALL_DETAILS,
   GET_ALL_PLANETS,
+  GET_ALL_VEHICLES,
   GET_PLANETS_DETAIL,
+  GET_VEHICLES_DETAIL,
   SET_DETAIL_CHARACTER,
   SET_PLANETS_DETAIL,
+  SET_VEHICLES_DETAIL,
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -12,6 +15,8 @@ const initialState = {
   characterDetails: {},
   planets: [],
   planetsDetails: {},
+  vehicles: [],
+  vehiclesDetails: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -46,6 +51,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         planetsDetails: {},
       };
+    case GET_ALL_VEHICLES:
+      return{
+        ...state,
+        vehicles: action.payload
+      }
+    case GET_VEHICLES_DETAIL:
+      return{
+        ...state,
+        vehiclesDetails: action.payload
+      }
+    case SET_VEHICLES_DETAIL:
+      return{
+        ...state,
+        vehiclesDetails: {}
+      }
     default:
       return { ...state };
   }
