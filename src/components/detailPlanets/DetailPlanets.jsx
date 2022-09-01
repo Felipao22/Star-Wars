@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { RingLoader } from "react-spinners";
@@ -11,7 +11,6 @@ export default function DetailPlanets() {
   const { id } = useParams();
   const planets = useSelector((state) => state.planetsDetails);
   const gState = useSelector((state) => state);
-  console.log(planets)
 
   //images from visualguide
   let imgUrlSplit = planets?.url?.split("/");
